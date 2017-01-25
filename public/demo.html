@@ -1,0 +1,72 @@
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+function launch(){
+  console.log('launch')
+  // ajax call
+  $.post( "/launch", function( data ) {
+    const result = "<pre>" + JSON.stringify(data, null, 2) + "</pre>"
+    $( "#launch" ).html( result );
+  })
+}
+
+function callback() {
+  console.log('callback')
+
+   $.ajax({url: "/callback", success: function(result){
+    $("#callback").html(result)
+  }})
+}
+
+function callbacks() {
+  $.ajax({url: "/callbacks", success: function(result){
+    $("#callbacks").html(result)
+  }})
+}
+
+function terminate() {
+  var id = $("#sim").val()
+  $.ajax({url: "/terminate/" + id, success: function(data) {
+    const result = "<pre>" + JSON.stringify(data, null, 2) + "</pre>"
+    $("#terminate").html(result)
+  }})
+}
+
+
+</script>
+</head>
+<body>
+
+<h1>Cloudsim integration demo</h1>
+<h2>Launch a simulator</h2>
+<button type="button" onclick="launch()">launch</button>
+<br>launch result:</div>
+<div id="launch"></div>
+
+<h2>Generate a callback</h2>
+callback url
+<input type="text" value="" id="data"></input>
+<button type="button" onclick="callback()">callback</button>
+<br>callback result:
+<div id="callback"></div>
+
+<h2>Get list of callbacks</h2>
+<button type="button" onclick="callbacks()">Update</button>
+<br>callbacks:
+<pre id="callbacks">
+</pre>
+
+<h2>Terminate</h2>
+You must specify a running simulator id (ex: simulator-123)
+<br>
+<input type="text" value="" id="sim"></input>
+<button type="button" onclick="terminate()">terminate</button>
+<br>terminate result:
+<div id="terminate"></div>
+
+</body>
+</html>
+

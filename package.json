@@ -1,0 +1,19 @@
+{
+  "name": "cloudsim-integration",
+  "version": "1.0.0",
+  "description": "Web app to test Cloudsim integration with other app. Simulates launching a simulation from another web app with periodical callbacks.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "superagent": "^3.3.2"
+  }
+}

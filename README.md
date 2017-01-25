@@ -1,29 +1,49 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is part of the [Cloudsim](https://bitbucket.org/osrf/cloudsim) project
 
-### What is this repository for? ###
+Web app to test various Cloudsim integrations.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This repo contains
 
-### How do I get set up? ###
+* A server with a demo page
+* Tests (that use that server)
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Setup ###
 
-### Contribution guidelines ###
+You must run this on a cloud server, because it will be contacted by simulators
+(via a curl on the /callback route)
 
-* Writing tests
-* Code review
-* Other guidelines
+You must provide a .env file with the following structure in the root directory:
 
-### Who do I talk to? ###
+`
 
-* Repo owner or admin
-* Other community or team contact
+# Portal url (dev, production, other?)
+PORTAL_URL="https://devportal.cloudsim.io
+
+# this token must have permission to launch simulators on the portal
+TOKEN="eyJhdsf .... rest of token ..... NIrwlEuljnXb3w"
+
+
+`
+
+Once the .env file is in place, install the node packages:
+
+`npm install`
+
+### How to run interactively ###
+
+Start the server:
+
+`npm start`
+
+Then point your browser to `http://xx.xx.xx.xx:5001/demo.html`
+(replace xx.xx.xx.x with the ip of the cloud server, make sure the port is open)
+
+From there, follow the instructions on the web page.
+
+
+Tests:
+
+`npm test`
+
