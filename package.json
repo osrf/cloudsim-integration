@@ -4,7 +4,7 @@
   "description": "Web app to test Cloudsim integration with other app. Simulates launching a simulation from another web app with periodical callbacks.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/eslint . && export NODE_ENV=test; mocha"
   },
   "author": "",
   "license": "ISC",
