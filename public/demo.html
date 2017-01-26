@@ -27,6 +27,13 @@ function callbacks() {
   }})
 }
 
+function clear_callbacks() {
+  $.ajax({url: "/clear_callbacks", success: function(result){
+    $("#callbacks").html(result)
+  }})
+}
+
+
 function terminate() {
   var id = $("#sim").val()
   $.ajax({url: "/terminate/" + id, success: function(data) {
@@ -47,9 +54,10 @@ function terminate() {
 <br>launch result (takes 3 seconds):</div>
 <div id="launch"></div>
 
-<h2>Generate a test callback</h2>
+<h2>test callback</h2>
 callback url
 <button type="button" onclick="callback()">callback</button>
+<button type="button" onclick="clear_callback()">clear callback list</button>
 <br>callback result:
 <div id="callback"></div>
 
