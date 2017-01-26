@@ -27,6 +27,7 @@ echo "callback_url: $callback_url" >> $log
 echo "callback_hz_secs: $callback_hz_secs" >> $log
 echo "callback_token: $callback_token" >> $log
 
+# this is the shutdown timer
 {
     # Stop the container after 10 minutes
     sleep 290
@@ -38,13 +39,14 @@ echo "callback_token: $callback_token" >> $log
 } &
 timer_pid=$!
 
+# this is the periodical callback loop
 {
   while true
   do
     echo "=================" >> $log
     echo `date` >> $log
     echo "Callback!" >> $log
-    curl $callback_url?ip=$ip&token=$callback_token
+    curl $callback_url --data-urlencode "ip=$ip" --data-urlencode "token=$callback_token"
     sleep $callback_hz_secs
   done
 } &

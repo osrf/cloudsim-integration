@@ -19,7 +19,7 @@ dotenv.load()
 const port = process.env.PORT || 8080
 // get our public ip for the callback
 const public_ip = child_process.execSync("curl checkip.amazonaws.com").toString().trim()
-app.url = public_ip + ':' + port
+app.url = 'http://' + public_ip + ':' + port
 
 /*
 const launchData = {

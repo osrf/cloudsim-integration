@@ -42,11 +42,14 @@ const token = process.env.TOKEN
 // things to be defined shortly, and then used
 // elsewhere.
 let agent
+let callbackUrl
 
 describe('<Integration test Server>', function() {
   this.timeout(5 * 60 * 1000)  // 5 minutes
   before(function(done) {
       const app = require('../server')
+      // this is the route we want to be called back on
+      callbackUrl = app.url +  '/callback'
       agent = supertest.agent(app)
       // check that we have the token
       log('token:', token)
