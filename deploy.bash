@@ -29,7 +29,7 @@ echo "callback_token: $callback_token" >> $log
 
 {
     # Stop the container after 10 minutes
-    sleep 600
+    sleep 290
     echo "$callback_hz_secs sec TIMEOUT TIMEOUT TIMEOUT (shutdown in 10 secs)" >> $log
     sleep 10
     # this command terminates the AWS instance
