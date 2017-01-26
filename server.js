@@ -8,7 +8,14 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 const http = require('http')
 const request = require('superagent')
+const child_process = require('child_process')
 
+// the configuration values are set in the local .env file
+// this loads the .env content and puts it in the process environment.
+dotenv.load()
+
+// get our public ip for the callback
+const public_ip = child_process.execSync("curl checkip.amazonaws.com").toString().trim()
 /*
 const launchData = {
   region: 'us-west-1',
@@ -23,6 +30,8 @@ const launchData = {
 }
 */
 
+
+
 // cloudsim-integration-test
 const launchData = {
   region: 'us-west-1',
@@ -35,10 +44,6 @@ const launchData = {
     callback_token: 'THIS_IS_THE_CALLBACK_TOKEN'
   }
 }
-
-// the configuration values are set in the local .env file
-// this loads the .env content and puts it in the process environment.
-dotenv.load()
 
 const cloudsimToken = process.env.TOKEN
 console.log('cloudsim token:', cloudsimToken, '\n\n')
@@ -175,6 +180,6 @@ catch(e) {
 }
 
 // start the server
-  httpServer.listen(port, function(){
-  console.log('listening on *:' + port)
+httpServer.listen(port, function(){
+  console.log('listening at ' + public_ip +   ':' + port)
 })
