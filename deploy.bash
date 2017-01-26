@@ -16,6 +16,7 @@ role=`get_option $optionsfile role`
 callback_url=`get_option $optionsfile callback_url`
 callback_hz_secs=`get_option $optionsfile callback_hz_secs`
 callback_token=`get_option $optionsfile callback_token`
+
 # the public ip of this machine
 ip=`curl checkip.amazonaws.com`
 
@@ -28,7 +29,7 @@ echo "callback_token: $callback_token" >> $log
 
 {
     # Stop the container after 5 minutes
-    sleep $callback_hz_secs
+    sleep 290
     echo "$callback_hz_secs sec TIMEOUT TIMEOUT TIMEOUT (shutdown in 10 secs)" >> $log
     sleep 10
     # this command terminates the AWS instance

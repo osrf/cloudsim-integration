@@ -45,7 +45,7 @@ const launchData = {
   options: {
     role: 'Prius Challenge simulator',
     callback_url: 'http://52.53.158.228:8080/callback',
-    callback_hz_secs: 60,
+    callback_hz_secs: 10,
     callback_token: 'THIS_IS_THE_CALLBACK_TOKEN'
   }
 }
@@ -149,8 +149,8 @@ app.use(express.static('public'))
 const callbacks = []
 app.get('/callback', function (req, res) {
   const date = new Date()
-  const s = `${date} callback!
-
+  // save the date and query parameters
+  const s = `[${date}] ${req.query}
 `
   console.log(s)
   callbacks.push(s)
