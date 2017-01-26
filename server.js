@@ -41,7 +41,7 @@ const launchData = {
 const launchData = {
   region: 'us-west-1',
   hardware:'t2.micro',
-  image: 'ami-0ca3f16c',
+  image: 'ami-37c19357',
   options: {
     role: 'Prius Challenge simulator',
     callback_url: 'http://52.53.158.228:8080/callback',

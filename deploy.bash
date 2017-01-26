@@ -39,6 +39,7 @@ echo "callback_token: $callback_token" >> $log
 #timer_pid=$!
 
 {
+
   while true
   do
     echo "=================" >> $log
@@ -50,5 +51,6 @@ echo "callback_token: $callback_token" >> $log
 } &
 callback_pid=$!
 
-
+sleep 600
+shutdown now
 
