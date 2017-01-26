@@ -164,7 +164,7 @@ app.get('/callbacks', function (req, res) {
 
 })
 
-pp.get('/clear_callbacks', function (req, res) {
+app.get('/clear_callbacks', function (req, res) {
   callbacks.length = 0
   res.jsonp(callbacks)
 
