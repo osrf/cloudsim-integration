@@ -149,8 +149,9 @@ app.use(express.static('public'))
 const callbacks = []
 app.get('/callback', function (req, res) {
   const date = new Date()
+  const query = JSON.stringify(req.query)
   // save the date and query parameters
-  const s = `[${date}] ${req.query}
+  const s = `[${date}] ${query}
 `
   console.log(s)
   callbacks.push(s)
