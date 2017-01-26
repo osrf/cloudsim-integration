@@ -27,16 +27,16 @@ echo "callback_url: $callback_url" >> $log
 echo "callback_hz_secs: $callback_hz_secs" >> $log
 echo "callback_token: $callback_token" >> $log
 
-{
-    # Stop the container after 10 minutes
-    sleep 600
-    echo "$callback_hz_secs sec TIMEOUT TIMEOUT TIMEOUT (shutdown in 10 secs)" >> $log
-    sleep 10
-    # this command terminates the AWS instance
-    shutdown now
+#{
+#    # Stop the container after 10 minutes
+#    sleep 600
+#    echo "$callback_hz_secs sec TIMEOUT TIMEOUT TIMEOUT (shutdown in 10 secs)" >> $log
+#    sleep 10
+#    # this command terminates the AWS instance
+#    shutdown now
 
-} &
-timer_pid=$!
+#} &
+#timer_pid=$!
 
 {
   while true
