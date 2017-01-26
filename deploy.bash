@@ -46,7 +46,12 @@ timer_pid=$!
     echo "=================" >> $log
     echo `date` >> $log
     echo "Callback!" >> $log
-    curl $callback_url --data-urlencode "ip=$ip" --data-urlencode "token=$callback_token"
+
+    # use curl to call the server
+    curl -X GET -G $callback_url \
+    -d "ip=$ip" \
+    -d "token=$callback_token"
+
     sleep $callback_hz_secs
   done
 } &
