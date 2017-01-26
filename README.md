@@ -2,6 +2,8 @@
 
 This is part of the [Cloudsim](https://bitbucket.org/osrf/cloudsim) project
 
+[demo](http://52.53.158.228:8080/demo.html)
+
 Web app to test various Cloudsim integrations.
 
 This repo contains

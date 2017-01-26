@@ -10,12 +10,17 @@ const http = require('http')
 const request = require('superagent')
 const child_process = require('child_process')
 
+const httpServer = http.Server(app)
+
 // the configuration values are set in the local .env file
 // this loads the .env content and puts it in the process environment.
 dotenv.load()
 
+const port = process.env.PORT || 8080
 // get our public ip for the callback
 const public_ip = child_process.execSync("curl checkip.amazonaws.com").toString().trim()
+app.url = public_ip + ':' + port
+
 /*
 const launchData = {
   region: 'us-west-1',
@@ -56,10 +61,6 @@ app.use(cors())
 app.use(bodyParser.json())
 // prints all requests to the terminal
 app.use(morgan('combined'))
-
-const httpServer = http.Server(app)
-
-const port = process.env.PORT || 8080
 
 
 function details() {
@@ -181,5 +182,5 @@ catch(e) {
 
 // start the server
 httpServer.listen(port, function(){
-  console.log('listening at ' + public_ip +   ':' + port)
+  console.log('listening at', app.url)
 })
