@@ -37,6 +37,8 @@ function parseResponse(text, show) {
 }
 
 
+
+
 // things used in the tests
 const token = process.env.TOKEN
 // things to be defined shortly, and then used
@@ -45,7 +47,9 @@ let agent
 let callbackUrl
 
 describe('<Integration test Server>', function() {
+  //
   this.timeout(5 * 60 * 1000)  // 5 minutes
+
   before(function(done) {
       const app = require('../server')
       // this is the route we want to be called back on
@@ -57,14 +61,6 @@ describe('<Integration test Server>', function() {
       done()
   })
 
-/*
-  describe ('This server', function() {
-    it('Should be online', function(done) {
-
-      done()
-    })
-  })
-*/
 
   describe ('Test micro instance', function() {
     it('Should be possible to launch a simulator', function(done) {

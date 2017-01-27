@@ -21,6 +21,15 @@ const port = process.env.PORT || 8080
 const public_ip = child_process.execSync("curl checkip.amazonaws.com").toString().trim()
 app.url = 'http://' + public_ip + ':' + port
 
+
+
+// Cloudsim routes.
+// We have dev servers and production servers. Prius Challenge is now
+// production servers.
+
+// const simulatorsRoute = 'https://devportal.cloudsim.io/simulators/'
+const simulatorsRoute = 'https://portal.cloudsim.io/simulators'
+
 /*
 const launchData = {
   region: 'us-west-1',
@@ -44,7 +53,7 @@ const launchData = {
   image: 'ami-37c19357',
   options: {
     role: 'Prius Challenge simulator',
-    callback_url: 'http://52.53.158.228:8080/callback',
+    callback_url: 'http://' + public_ip  + ':8080/callback',
     callback_hz_secs: 10,
     callback_token: 'THIS_IS_THE_CALLBACK_TOKEN'
   }
@@ -101,7 +110,7 @@ app.get('/', function (req, res) {
 app.post('/launch', function (req, res) {
 
   // Here, post to the portal and send the result as is.
-  request.post('https://devportal.cloudsim.io/simulators')
+  request.post(simulatorsRoute)
     .set('Accept', 'application/json')
     .set('authorization', cloudsimToken)
     .send(launchData)
@@ -116,13 +125,34 @@ app.post('/launch', function (req, res) {
   })
 })
 
+// get simulator info (for example the ip appears here after 10 secs)
+app.get('/simulator/:simulator', function (req, res) {
+  console.log('\n\nsimulator info')
+  const simulator = req.simulator
+  console.log('simulator: ' + simulator)
+
+  request.get(simulatorsRoute + '/' + simulator)
+    .set('Accept', 'application/json')
+    .set('authorization', cloudsimToken)
+    .send()
+    .end( function (err, response) {
+      console.log('response:', response.text)
+      const result = JSON.parse(response.text)
+      console.log('status:', response.status)
+      const s = JSON.stringify(result, null, 2)
+      console.log(s)
+      res.status(response.status).jsonp(result)
+    })
+
+})
+
 app.get('/terminate/:simulator', function (req, res) {
-  console.log('terminate')
+  console.log('\n\nterminate')
   const simulator = req.simulator
   console.log('simulator: ' + simulator)
 
   // DELETE request to /simulators
-  request.delete('https://devportal.cloudsim.io/simulators/' + simulator)
+  request.delete(simulatorsRoute + '/' + simulator)
     .set('Accept', 'application/json')
     .set('authorization', cloudsimToken)
     .send({})

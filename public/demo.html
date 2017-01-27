@@ -13,10 +13,17 @@ function launch(){
   })
 }
 
+function info() {
+  var id = $("#infosim").val()
+  $.ajax({url: "/simulator/" + id, success: function(data){
+    const result = "<pre>" + JSON.stringify(data, null, 2) + "</pre>"
+    $("#info").html(result)
+  }})
+}
+
 function callback() {
   console.log('callback')
-
-   $.ajax({url: "/callback", success: function(result){
+  $.ajax({url: "/callback", success: function(result){
     $("#callback").html(result)
   }})
 }
@@ -35,7 +42,7 @@ function clear_callbacks() {
 
 
 function terminate() {
-  var id = $("#sim").val()
+  var id = $("#termsim").val()
   $.ajax({url: "/terminate/" + id, success: function(data) {
     const result = "<pre>" + JSON.stringify(data, null, 2) + "</pre>"
     $("#terminate").html(result)
@@ -68,10 +75,18 @@ callback url
 <pre id="callbacks">
 </pre>
 
+<h2>Get simulator info</h2>
+If you want the ip of the simulator, you need to call this route (about 10 secs after launch).
+<br>
+<input type="text" value="" id="infosim"></input>
+<button type="button" onclick="info()">info</button>
+<br>info result:
+<div id="info"></div>
+
 <h2>Terminate</h2>
 You must specify a running simulator id (ex: simulator-123)
 <br>
-<input type="text" value="" id="sim"></input>
+<input type="text" value="" id="termsim"></input>
 <button type="button" onclick="terminate()">terminate</button>
 <br>terminate result:
 <div id="terminate"></div>
