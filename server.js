@@ -30,34 +30,22 @@ app.url = 'http://' + public_ip + ':' + port
 // const simulatorsRoute = 'https://devportal.cloudsim.io/simulators/'
 const simulatorsRoute = 'https://portal.cloudsim.io/simulators'
 
-/*
-const launchData = {
-  region: 'us-west-1',
-  hardware:'g2.2xlarge',
-  image: 'ami-7ae3b01a',
-  options: {
-    role: 'Prius Challenge simulator',
-    callback_ip: 'http://52.53.158.228',
-    callback_hz_secs: 60,
-    callback_token: 'THIS_IS_THE_CALLBACK_TOKEN'
-  }
-}
-*/
-
 
 
 // cloudsim-integration-test
 const launchData = {
   region: 'us-west-1',
-  hardware:'t2.micro',
-  image: 'ami-37c19357',
+  hardware: 'g2.2xlarge',
+  image:'ami-a64a17c6',  // this is version 0.8 of Prius Challenge.
   options: {
     role: 'Prius Challenge simulator',
-    callback_url: 'http://' + public_ip  + ':8080/callback',
-    callback_hz_secs: 10,
-    callback_token: 'THIS_IS_THE_CALLBACK_TOKEN'
   }
 }
+
+// FOR TESTING: repalce simulator with a cheap t2.micro
+// launchData.hardware:'t2.micro'
+// launchData.image: 'ami-37c19357'
+
 
 const cloudsimToken = process.env.TOKEN
 console.log('cloudsim token:', cloudsimToken, '\n\n')
