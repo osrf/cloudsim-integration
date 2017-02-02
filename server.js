@@ -39,6 +39,7 @@ const launchData = {
   image:'ami-a64a17c6',  // this is version 0.8 of Prius Challenge.
   options: {
     role: 'Prius Challenge simulator',
+    callback_token: 'USER_TOKEN'
   }
 }
 
